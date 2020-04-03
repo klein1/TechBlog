@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.site.blog.my.core.dao.BlogCategoryMapper">
-    <resultMap id="BaseResultMap" type="com.site.blog.my.core.entity.BlogCategory">
+<mapper namespace="com.tech.blog.dao.BlogCategoryMapper">
+    <resultMap id="BaseResultMap" type="com.tech.blog.entity.BlogCategory">
         <id column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="category_name" jdbcType="VARCHAR" property="categoryName"/>
-        <result column="category_icon" jdbcType="VARCHAR" property="categoryIcon"/>
         <result column="category_rank" jdbcType="INTEGER" property="categoryRank"/>
         <result column="is_deleted" jdbcType="TINYINT" property="isDeleted"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    category_id, category_name, category_icon, category_rank, is_deleted, create_time
+    category_id, category_name, category_rank, is_deleted, create_time
   </sql>
     <select id="findCategoryList" parameterType="Map" resultMap="BaseResultMap">
         select
@@ -62,15 +61,15 @@
             #{id}
         </foreach>
     </update>
-    <insert id="insert" parameterType="com.site.blog.my.core.entity.BlogCategory">
-    insert into tb_blog_category (category_id, category_name, category_icon, 
+    <insert id="insert" parameterType="com.tech.blog.entity.BlogCategory">
+    insert into tb_blog_category (category_id, category_name,
       category_rank, is_deleted, create_time
       )
-    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{categoryIcon,jdbcType=VARCHAR}, 
+    values (#{categoryId,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR},
       #{categoryRank,jdbcType=INTEGER}, #{isDeleted,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-    <insert id="insertSelective" parameterType="com.site.blog.my.core.entity.BlogCategory">
+    <insert id="insertSelective" parameterType="com.tech.blog.entity.BlogCategory">
         insert into tb_blog_category
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="categoryId != null">
@@ -78,9 +77,6 @@
             </if>
             <if test="categoryName != null">
                 category_name,
-            </if>
-            <if test="categoryIcon != null">
-                category_icon,
             </if>
             <if test="categoryRank != null">
                 category_rank,
@@ -99,9 +95,6 @@
             <if test="categoryName != null">
                 #{categoryName,jdbcType=VARCHAR},
             </if>
-            <if test="categoryIcon != null">
-                #{categoryIcon,jdbcType=VARCHAR},
-            </if>
             <if test="categoryRank != null">
                 #{categoryRank,jdbcType=INTEGER},
             </if>
@@ -113,14 +106,11 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.site.blog.my.core.entity.BlogCategory">
+    <update id="updateByPrimaryKeySelective" parameterType="com.tech.blog.entity.BlogCategory">
         update tb_blog_category
         <set>
             <if test="categoryName != null">
                 category_name = #{categoryName,jdbcType=VARCHAR},
-            </if>
-            <if test="categoryIcon != null">
-                category_icon = #{categoryIcon,jdbcType=VARCHAR},
             </if>
             <if test="categoryRank != null">
                 category_rank = #{categoryRank,jdbcType=INTEGER},
@@ -134,10 +124,9 @@
         </set>
         where category_id = #{categoryId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.site.blog.my.core.entity.BlogCategory">
+    <update id="updateByPrimaryKey" parameterType="com.tech.blog.entity.BlogCategory">
     update tb_blog_category
     set category_name = #{categoryName,jdbcType=VARCHAR},
-      category_icon = #{categoryIcon,jdbcType=VARCHAR},
       category_rank = #{categoryRank,jdbcType=INTEGER},
       is_deleted = #{isDeleted,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=TIMESTAMP}

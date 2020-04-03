@@ -20,14 +20,14 @@
         <section>
             <div class="sidebar-header">
                 <span class="sidebar-header-title">
-                    热门标签
+                    技术分类
                 </span>
             </div>
             <div class="tags ">
-                <th:block th:if="${null != hotTags}">
-                    <th:block th:each="hotTag : ${hotTags}">
-                        <a rel="tag" th:href="@{'/tag/' + ${hotTag.tagName}}">
-                            <th:block th:text="${hotTag.tagName}+'('+${hotTag.tagCount}+')'"></th:block>
+                <th:block th:if="${null != categories}">
+                    <th:block th:each="category : ${categories}">
+                        <a rel="tag" th:href="@{'/category/' + ${category.categoryName}}">
+                            <th:block th:text="${category.categoryName}"></th:block>
                         </a>
                     </th:block>
                 </th:block>
@@ -36,26 +36,42 @@
         <section>
             <div class="sidebar-header">
                 <span class="sidebar-header-title">
-                    最新发布
+                    热门标签
                 </span>
             </div>
-            <div class="sidebar-list">
-                <ul class="sidebar-list-body sidebar-list-items">
-                    <th:block th:if="${null != newBlogs}">
-                        <th:block th:each="newBlog : ${newBlogs}">
-                            <li class="sidebar-list-item"><a th:href="@{'/blog/' + ${newBlog.blogId}}"
-                                                             class="tag tooltipped tooltipped-n">
-                                <th:block th:text="${newBlog.blogTitle}"></th:block>
-                            </a></li>
-                        </th:block>
+            <div class="tags2 ">
+                <th:block th:if="${null != hotTags}">
+                    <th:block th:each="hotTag : ${hotTags}">
+                        <a rel="tag" th:href="@{'/tag/' + ${hotTag.tagName}}" class="tag-box">
+                            <i th:text="${hotTag.tagName}+'('+${hotTag.tagCount}+')'"></i>
+                        </a>
                     </th:block>
-                </ul>
+                </th:block>
             </div>
         </section>
+        <!--<section>-->
+            <!--<div class="sidebar-header">-->
+                <!--<span class="sidebar-header-title">-->
+                    <!--最新发布-->
+                <!--</span>-->
+            <!--</div>-->
+            <!--<div class="sidebar-list">-->
+                <!--<ul class="sidebar-list-body sidebar-list-items">-->
+                    <!--<th:block th:if="${null != newBlogs}">-->
+                        <!--<th:block th:each="newBlog : ${newBlogs}">-->
+                            <!--<li class="sidebar-list-item"><a th:href="@{'/blog/' + ${newBlog.blogId}}"-->
+                                                             <!--class="tag tooltipped tooltipped-n">-->
+                                <!--<th:block th:text="${newBlog.blogTitle}"></th:block>-->
+                            <!--</a></li>-->
+                        <!--</th:block>-->
+                    <!--</th:block>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</section>-->
         <section>
             <div class="sidebar-header">
                 <span class="sidebar-header-title">
-                    点击最多
+                    热门文章
                 </span>
             </div>
             <main class="sidebar-lists">

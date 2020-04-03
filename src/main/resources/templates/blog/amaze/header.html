@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Window-target" content="_top"/>
     <link rel="stylesheet" th:href="@{/blog/amaze/css/base.css}">
+    <link rel="stylesheet" th:href="@{/blog/amaze/css/font-awesome.css}">
 </head>
 <nav th:fragment="nav-fragment" class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
@@ -19,13 +20,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" th:text="${configurations.get('websiteName')}">
-            </a>
+            <!--<a class="navbar-brand" href="/" th:text="${configurations.get('websiteName')}">-->
+            <!--</a>-->
         </div>
         <div class="navbar-collapse" style="display: none;" id="toggle-items" >
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a th:href="@{/index}">主页</a>
+                    <a th:href="@{/}">主页</a>
                 </li>
                 <li>
                     <a th:href="@{/about}">关于</a>
@@ -36,7 +37,7 @@
             <div class="navbar-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a th:href="@{/index}">主页</a>
+                        <a th:href="@{/}">主页</a>
                     </li>
                     <li>
                         <a th:href="@{/about}">关于</a>
@@ -45,7 +46,7 @@
             </div>
         </div>
         <!-- /.navbar-collapse -->
-        <script th:src="@{/blog/default/js/jquery.min.js}"></script>
+        <script th:src="@{/blog/amaze/js/jquery.min.js}"></script>
         <script>
             $(function () {
                 $('.navbar-toggle').click(function () {

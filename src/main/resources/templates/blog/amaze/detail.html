@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title th:text="${configurations.get('websiteName')}+' | '+${pageName}">详情页</title>
+    <title th:text="${configurations.get('websiteName')}+' | '+${pageName}">详情</title>
     <meta name="description" th:content="${configurations.get('websiteDescription')}">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" th:href="@{${configurations.get('websiteIcon')}}"/>
     <link rel="stylesheet" th:href="@{/blog/amaze/css/base.css}">
+    <link rel="stylesheet" th:href="@{/blog/amaze/css/font-awesome.css}">
     <!-- highlight -->
-    <link rel="stylesheet" th:href="@{/blog/plugins/highlight/styles/paraiso-light.css}">
+    <link rel="stylesheet" th:href="@{/blog/amaze/highlight/styles/paraiso-light.css}">
     <style>
         .hljs {
             background: none;
@@ -31,20 +32,18 @@
 <body>
 <div th:replace="blog/amaze/header::nav-fragment"></div>
 <header th:fragment="header-fragment" class="intro-header"
-        th:style="'background-image:url(' + @{/blog/amaze/images/header.jpg} + ');'">
+        th:style="'background-image:url(' + @{/blog/amaze/images/header2.jpg} + ');'">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     <h1 th:text="${blogDetailVO.blogTitle}"></h1>
-                    <span class="meta">
-                        <th:block th:text="${#dates.format(blogDetailVO.createTime, 'yyyy-MM-dd')}"></th:block> &nbsp;
-                            <div class="comments-view" style="display: inline-block">
-                                <a href="#comments" class="article-comments"><th:block
-                                        th:text="${blogDetailVO.commentCount}"></th:block>条评论</a> &nbsp;
-                                <th:block th:text="${blogDetailVO.blogViews}"></th:block>浏览
-                            </div>
-                            </span>
+                    <div class="meta">
+                        <i class="fa fa-bookmark-o"></i>&nbsp;<span style="margin-right: 20px;" th:utext="${blogDetailVO.blogCategoryName}">「默认分类」</span>
+                        <i class="fa fa-clock-o"></i>&nbsp;<span style="margin-right: 20px;" th:text="${#dates.format(blogDetailVO.createTime, 'yyyy-MM-dd')}">2020-01-01</span>
+                        <!--<i class="fa fa-eye"></i>&nbsp;<span style="margin-right: 10px;" th:utext="${blogDetailVO.blogViews}">0</span>-->
+                        <i class="fa fa-comment-o"></i>&nbsp;<span th:utext="${blogDetailVO.commentCount}">0</span>
+                    </div>
                     <div class="tags post-tags">
                         <th:block th:each="tag : ${blogDetailVO.blogTags}">
                             <a class="tag" rel="tag" th:href="@{'/tag/' + ${tag}}">
@@ -55,16 +54,24 @@
                 </div>
             </div>
         </div>
+    </div>
 </header>
 <div class="container">
+    <div class="sidebar-header">
+        <a class="main-header-title" th:href="@{/index}">
+            <i class="fa fa-home"></i>主页 >
+        </a>
+        <a class="main-header-title" th:href="@{'/category/'+${blogDetailVO.blogCategoryName}}" th:text="${blogDetailVO.blogCategoryName} + ' >'"></a>
+        <a class="main-header-title focus" href="" th:text="${blogDetailVO.blogTitle}"></a>
+    </div>
     <div class="am-g am-g-fixed blog-fixed">
         <div class="am-u-lg-12 am-u-sm-12">
             <article class="am-article blog-article-p article-trigger">
                 <div id="post-content" class="am-article-bd article-body">
                     <th:block th:utext="${blogDetailVO.blogContent}"/>
-                    <aside class="blog-rights clearfix">
-                        <p>本站文章除注明转载/出处外，皆为作者原创，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文链接，否则保留追究法律责任的权利。</p>
-                    </aside>
+                    <!--<aside class="blog-rights clearfix">-->
+                    <!--<p>本站文章除注明转载/出处外，皆为作者原创，欢迎转载，但未经作者同意必须保留此段声明，且在文章页面明显位置给出原文链接，否则保留追究法律责任的权利。</p>-->
+                    <!--</aside>-->
                 </div>
             </article>
             <hr>
@@ -75,13 +82,10 @@
             <th:block th:each="comment,iterStat : ${commentPageResult.list}">
                 <article class="comment">
                     <header class="clearfix">
-                        <img th:src="@{/blog/default/img/avatar.png}" class="avatar">
+                        <img th:src="@{/blog/amaze/images/avatar.png}" class="avatar" draggable="false">
                         <div class="meta">
-                            <h3 th:text="${comment.commentator}"></h3>
-                            <span class="date">
-                                       评论时间：<th:block
-                                    th:text="${#dates.format(comment.commentCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
-                                    </span>
+                            <b th:text="${comment.commentator}" style="margin-right: 20px"></b>
+                            <i class="fa fa-clock-o">&nbsp;</i><span class="date" th:text="${#dates.format(comment.commentCreateTime, 'yyyy-MM-dd HH:mm')}"></span>
                         </div>
                     </header>
                     <div class="body">
@@ -91,18 +95,13 @@
                 <th:block th:unless="${#strings.isEmpty(comment.replyBody)}">
                     <article class="comment reply">
                         <header class="clearfix">
-                            <img th:src="@{${configurations.get('yourAvatar')}}"
-                                 style="float: left;border-radius: 100px;width: 50px;">
-                            <div class="meta2">
-                                <h3 th:text="${configurations.get('yourName')}">十三</h3>
-                                <span class="date">
-                                        回复时间： <th:block
-                                        th:text="${#dates.format(comment.replyCreateTime, 'yyyy-MM-dd HH:mm:ss')}"></th:block>
-                                    </span>
-
+                            <img th:src="@{${configurations.get('yourAvatar')}}" style="float: left;border-radius: 100px;width: 50px;" draggable="false">
+                            <div class="meta" style="margin-left: 68px">
+                                <b th:text="${configurations.get('yourName')}" style="margin-right: 20px"></b>
+                                <i class="fa fa-clock-o">&nbsp;</i><span class="date" th:text="${#dates.format(comment.replyCreateTime, 'yyyy-MM-dd HH:mm')}"></span>
                             </div>
                         </header>
-                        <div class="reply-body">
+                        <div class="body">
                             <th:block th:text="${comment.replyBody}"></th:block>
                         </div>
                     </article>
@@ -110,7 +109,7 @@
             </th:block>
         </th:block>
         <th:block th:if="${null != commentPageResult}">
-            <ul class="am-pagination">
+            <ul class="am-pagination" style="text-align: center">
                 <li th:class="${commentPageResult.currPage==1}?'disabled' : ''"><a
                         th:href="@{${commentPageResult.currPage==1}?'##':'/blog/'+${blogDetailVO.blogId}+'?commentPage=' + ${commentPageResult.currPage-1}+'#comments'}">&laquo;</a>
                 </li>
@@ -142,43 +141,35 @@
     <th:block th:if="${blogDetailVO.enableComment==0}">
         <aside class="create-comment" id="create-comment">
             <hr>
-            <h2><i class="fa fa-pencil"></i> 添加评论</h2>
             <table id="commentForm" class="form">
                 <tbody>
                 <tr>
                     <td>
                         <input type="hidden" id="blogId" name="blogId" th:value="${blogDetailVO.blogId}"></input>
-                        <input type="text" name="commentator" id="commentator" placeholder="(*必填)怎么称呼你?">
+                        <input type="text" name="commentator" id="commentator" placeholder="名称">
+                    </td>
+                    <td>
+                        <input type="email" name="email" id="email" placeholder="联系邮箱">
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <input type="email" name="email" id="email" placeholder="(*必填)你的联系邮箱">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" name="websiteUrl" id="websiteUrl" placeholder="你的网站地址(可不填)">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
+                    <td colspan="2">
                         <input style="width:50%" type="text" name="verifyCode" id="verifyCode"
-                               placeholder="(*必填)请输入验证码">&nbsp;&nbsp;
-                        <img alt="单击图片刷新！" class="pointer" style="margin-top: 15px; border-radius: 25px;"
+                               placeholder="验证码">&nbsp;&nbsp;
+                        <img alt="刷新" class="pointer" style="border-radius: 25px;"
                              th:src="@{/common/kaptcha}"
                              onclick="this.src='/common/kaptcha?d='+new Date()*1">
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                        <textarea rows="5" name="commentBody" id="commentBody" placeholder="(*必填)请输入你的评论"></textarea>
+                    <td colspan="2">
+                        <textarea rows="5" name="commentBody" id="commentBody" placeholder="评论内容"></textarea>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center">
+                    <td colspan="2" align="left">
                         <button id="commentSubmit" type="submit"
-                                class="submit am-btn am-btn-primary">提交
+                                class="submit am-btn am-btn-primary">提交评论
                         </button>
                     </td>
                 </tr>
@@ -190,12 +181,12 @@
 </div>
 <footer th:replace="blog/amaze/footer::footer-fragment"></footer>
 </body>
-<script th:src="@{/blog/default/js/jquery.min.js}"></script>
-<script th:src="@{/blog/plugins/highlight/highlight.pack.js}"></script>
-<script th:src="@{/blog/plugins/comment/valid.js}"></script>
-<script th:src="@{/blog/plugins/comment/comment.js}"></script>
+<script th:src="@{/blog/amaze/js/jquery.min.js}"></script>
+<script th:src="@{/blog/amaze/highlight/highlight.pack.js}"></script>
+<script th:src="@{/blog/amaze/comment/valid.js}"></script>
+<script th:src="@{/blog/amaze/comment/comment.js}"></script>
 <!-- sweetalert -->
-<script th:src="@{/admin/plugins/sweetalert/sweetalert.min.js}"></script>
+<script th:src="@{/blog/amaze/sweetalert/sweetalert.min.js}"></script>
 <script>
     $(function () {
         $("#back-top").hide();

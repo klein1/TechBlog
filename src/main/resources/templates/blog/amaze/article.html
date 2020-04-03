@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<article class="am-g blog-entry-article" th:fragment="article-fragment">
+    <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
+        <div class="topic-header">
+            <div class="pull-left" style="color:lightslategrey">
+                <i class="fa fa-bookmark"></i><a style="color:lightslategrey" th:href="@{'/category/' + ${blog.blogCategoryName}}"><span th:utext="'「'+${blog.blogCategoryName}+'」'">「默认分类」</span></a>
+                <i class="fa fa-eye"></i>&nbsp;<span th:utext="${blog.blogViews}">0</span>
+            </div>
+            <div class="pull-right" style="color:darkgrey">
+                <i class="fa fa-clock-o"></i>&nbsp;<span th:text="${#dates.format(blog.createTime, 'yyyy-MM-dd')}">2020-01-01</span>
+            </div>
+        </div>
+        <h1 class="post-index-title" style="margin-top:15px"><a itemtype="url" th:href="@{'/blog/' + ${blog.blogId}}">
+            <th:block th:text="${blog.blogTitle}"></th:block>
+        </a>
+        </h1>
+        <div class="post-content-preview article-body" th:if="@{${blog.blogCoverImage}!=null}">
+            <a th:href="@{'/blog/' + ${blog.blogId}}"><img th:src="@{${blog.blogCoverImage}}" alt=""></a>
+        </div>
+        <div class="clearfix topic-footer">
+            <th:block th:each="tag : ${blog.blogTags}">
+                <a th:href="@{'/tag/' + ${tag}}"><i class="pull-left tag-box" th:text="${tag}">默认标签</i></a>
+            </th:block>
+        </div>
+    </div>
+</article>
+</html>
