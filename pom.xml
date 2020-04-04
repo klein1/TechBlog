@@ -6,7 +6,7 @@
     <groupId>com.tech.blog</groupId>
     <artifactId>techblog</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <name>tech-blog</name>
     <description>Technique Blog</description>

@@ -31,6 +31,7 @@ public class ConfigurationController {
     @ResponseBody
     public Result website(@RequestParam(value = "websiteName", required = false) String websiteName,
                           @RequestParam(value = "websiteDescription", required = false) String websiteDescription,
+                          @RequestParam(value = "websiteSubhead", required = false) String websiteSubhead,
                           @RequestParam(value = "websiteLogo", required = false) String websiteLogo,
                           @RequestParam(value = "websiteIcon", required = false) String websiteIcon) {
         int updateResult = 0;
@@ -39,6 +40,9 @@ public class ConfigurationController {
         }
         if (!StringUtils.isEmpty(websiteDescription)) {
             updateResult += configService.updateConfig("websiteDescription", websiteDescription);
+        }
+        if (!StringUtils.isEmpty(websiteSubhead)) {
+            updateResult += configService.updateConfig("websiteSubhead", websiteSubhead);
         }
         if (!StringUtils.isEmpty(websiteLogo)) {
             updateResult += configService.updateConfig("websiteLogo", websiteLogo);
@@ -66,32 +70,5 @@ public class ConfigurationController {
         }
         return ResultGenerator.genSuccessResult(updateResult > 0);
     }
-
-    @PostMapping("/configurations/footer")
-    @ResponseBody
-    public Result footer(@RequestParam(value = "footerAbout", required = false) String footerAbout,
-                         @RequestParam(value = "footerICP", required = false) String footerICP,
-                         @RequestParam(value = "footerCopyRight", required = false) String footerCopyRight,
-                         @RequestParam(value = "footerPoweredBy", required = false) String footerPoweredBy,
-                         @RequestParam(value = "footerPoweredByURL", required = false) String footerPoweredByURL) {
-        int updateResult = 0;
-        if (!StringUtils.isEmpty(footerAbout)) {
-            updateResult += configService.updateConfig("footerAbout", footerAbout);
-        }
-        if (!StringUtils.isEmpty(footerICP)) {
-            updateResult += configService.updateConfig("footerICP", footerICP);
-        }
-        if (!StringUtils.isEmpty(footerCopyRight)) {
-            updateResult += configService.updateConfig("footerCopyRight", footerCopyRight);
-        }
-        if (!StringUtils.isEmpty(footerPoweredBy)) {
-            updateResult += configService.updateConfig("footerPoweredBy", footerPoweredBy);
-        }
-        if (!StringUtils.isEmpty(footerPoweredByURL)) {
-            updateResult += configService.updateConfig("footerPoweredByURL", footerPoweredByURL);
-        }
-        return ResultGenerator.genSuccessResult(updateResult > 0);
-    }
-
 
 }

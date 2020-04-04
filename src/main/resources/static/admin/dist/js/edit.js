@@ -21,6 +21,7 @@ $(function () {
         imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"], //图片上传格式
         imageUploadURL: "/admin/blogs/md/uploadfile",
         onload: function (obj) { //上传成功之后的回调
+            console.log(obj);
         }
     });
 
@@ -148,12 +149,12 @@ $('#saveButton').click(function () {
     var blogCoverImage = $('#blogCoverImage')[0].src;
     var blogStatus = $("input[name='blogStatus']:checked").val();
     var enableComment = $("input[name='enableComment']:checked").val();
-    if (isNull(blogCoverImage) || blogCoverImage.indexOf('img-upload') != -1) {
-        swal("封面图片不能为空", {
-            icon: "error",
-        });
-        return;
-    }
+    // if (isNull(blogCoverImage) || blogCoverImage.indexOf('img-upload') != -1) {
+    //     swal("封面图片不能为空", {
+    //         icon: "error",
+    //     });
+    //     return;
+    // }
     var url = '/admin/blogs/save';
     var swlMessage = '保存成功';
     var data = {
@@ -219,8 +220,8 @@ $('#cancelButton').click(function () {
 /**
  * 随机封面功能
  */
-$('#randomCoverImage').click(function () {
-    var rand = parseInt(Math.random() * 40 + 1);
-    $("#blogCoverImage").attr("src", '/admin/dist/img/rand/' + rand + ".jpg");
-    $("#blogCoverImage").attr("style", "width:160px ;height: 120px;display:block;");
-});
+// $('#randomCoverImage').click(function () {
+//     var rand = parseInt(Math.random() * 40 + 1);
+//     $("#blogCoverImage").attr("src", '/admin/dist/img/rand/' + rand + ".jpg");
+//     $("#blogCoverImage").attr("style", "width:160px ;height: 120px;display:block;");
+// });

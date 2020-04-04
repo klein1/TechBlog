@@ -106,7 +106,8 @@ public class BlogController {
             return ResultGenerator.genFailResult("文章内容过长");
         }
         if (StringUtils.isEmpty(blogCoverImage)) {
-            return ResultGenerator.genFailResult("封面图不能为空");
+//            return ResultGenerator.genFailResult("封面图不能为空");
+            blogCoverImage = null;
         }
         Blog blog = new Blog();
         blog.setBlogTitle(blogTitle);
@@ -158,7 +159,8 @@ public class BlogController {
             return ResultGenerator.genFailResult("文章内容过长");
         }
         if (StringUtils.isEmpty(blogCoverImage)) {
-            return ResultGenerator.genFailResult("封面图不能为空");
+//            return ResultGenerator.genFailResult("封面图不能为空");
+            blogCoverImage = null;
         }
         Blog blog = new Blog();
         blog.setBlogId(blogId);

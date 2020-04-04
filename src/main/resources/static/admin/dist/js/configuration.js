@@ -56,33 +56,4 @@ $(function () {
             }
         });
     });
-    //修改底部设置
-    $('#updateFooterButton').click(function () {
-        $("#updateFooterButton").attr("disabled", true);
-        var params = $("#footerForm").serialize();
-        $.ajax({
-            type: "POST",
-            url: "/admin/configurations/footer",
-            data: params,
-            success: function (result) {
-                if (result.resultCode == 200&& result.data) {
-                    swal("保存成功", {
-                        icon: "success",
-                    });
-                }
-                else {
-                    swal(result.message, {
-                        icon: "error",
-                    });
-                }
-                ;
-            },
-            error: function () {
-                swal("操作失败", {
-                    icon: "error",
-                });
-            }
-        });
-    });
-
 })

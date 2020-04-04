@@ -8,12 +8,15 @@
                     <i class="fa fa-home"></i>主页
                 </a>
             </div>
+            <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12" style="text-align: center" th:unless="${null != blogPageResult and blogPageResult.totalCount != 0}">
+                <img th:src="@{/blog/amaze/images/notfound.png}" draggable="false"/>
+            </div>
             <th:block th:if="${null != blogPageResult}">
                 <th:block th:each="blog,iterStat : ${blogPageResult.list}">
                     <article th:replace="blog/amaze/article::article-fragment"></article>
                 </th:block>
             </th:block>
-            <th:block th:if="${null != blogPageResult}">
+            <th:block th:if="${null != blogPageResult} and blogPageResult.totalCount != 0">
                 <ul class="am-pagination">
                     <li th:class="${blogPageResult.currPage==1}?'disabled' : 'am-pagination-prev'"><a
                             th:href="@{${blogPageResult.currPage==1}?'##':'/page/' + ${blogPageResult.currPage-1}}">&laquo;</a>

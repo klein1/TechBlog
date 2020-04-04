@@ -43,7 +43,10 @@ $(function () {
     });
 
     function coverImageFormatter(cellvalue) {
-        return "<img src='" + cellvalue + "' height=\"120\" width=\"160\" alt='coverImage'/>";
+        if(cellvalue)
+            return "<img src='" + cellvalue + "' height=\"120\" width=\"160\" alt='coverImage'/>";
+        else
+            return "";
     }
 
     function statusFormatter(cellvalue) {

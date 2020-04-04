@@ -1,10 +1,10 @@
 server:
-  port: 8091
+  port: 8083
 
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/techblog?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/techblog?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
     username: root
     password: soft.@#1217.cn
   thymeleaf:

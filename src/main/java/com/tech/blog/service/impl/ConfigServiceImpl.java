@@ -17,20 +17,14 @@ public class ConfigServiceImpl implements ConfigService {
     @Autowired
     private BlogConfigMapper configMapper;
 
-    public static final String websiteName = "personal blog";
-    public static final String websiteDescription = "personal blog是SpringBoot2+Thymeleaf+Mybatis建造的个人博客网站.SpringBoot实战博客源码.个人博客搭建";
-    public static final String websiteLogo = "/admin/dist/img/logo2.png";
+    public static final String websiteName = "Technique Blog";
+    public static final String websiteDescription = "SpringBoot2+Thymeleaf+Mybatis";
+    public static final String websiteLogo = "/admin/dist/img/logo1.png";
     public static final String websiteIcon = "/admin/dist/img/favicon.png";
 
-    public static final String yourAvatar = "/admin/dist/img/13.png";
-    public static final String yourEmail = "2449207463@qq.com";
-    public static final String yourName = "十三";
-
-    public static final String footerAbout = "your personal blog. have fun.";
-    public static final String footerICP = "浙ICP备 xxxxxx-x号";
-    public static final String footerCopyRight = "@2018 十三";
-    public static final String footerPoweredBy = "personal blog";
-    public static final String footerPoweredByURL = "##";
+    public static final String yourAvatar = "/admin/dist/img/avatar/avatar1.jpg";
+    public static final String yourEmail = "minholl@qq.com";
+    public static final String yourName = "minhol";
 
     @Override
     public int updateConfig(String configName, String configValue) {
@@ -69,21 +63,6 @@ public class ConfigServiceImpl implements ConfigService {
             }
             if ("yourName".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
                 config.setValue(yourName);
-            }
-            if ("footerAbout".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
-                config.setValue(footerAbout);
-            }
-            if ("footerICP".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
-                config.setValue(footerICP);
-            }
-            if ("footerCopyRight".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
-                config.setValue(footerCopyRight);
-            }
-            if ("footerPoweredBy".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
-                config.setValue(footerPoweredBy);
-            }
-            if ("footerPoweredByURL".equals(config.getKey()) && StringUtils.isEmpty(config.getValue())) {
-                config.setValue(footerPoweredByURL);
             }
         }
         return configMap;

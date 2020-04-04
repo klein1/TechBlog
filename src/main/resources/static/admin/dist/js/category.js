@@ -33,30 +33,11 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
         }
     });
-
-    jQuery("select.image-picker").imagepicker({
-        hide_select: false,
-    });
-
-    jQuery("select.image-picker.show-labels").imagepicker({
-        hide_select: false,
-        show_label: true,
-    });
     $(window).resize(function () {
         $("#jqGrid").setGridWidth($(".card-body").width());
     });
-    var container = jQuery("select.image-picker.masonry").next("ul.thumbnails");
-    container.imagesLoaded(function () {
-        container.masonry({
-            itemSelector: "li",
-        });
-    });
 
 });
-
-function imgFormatter(cellvalue) {
-    return "<a href='" + cellvalue + "'> <img src='" + cellvalue + "' height=\"64\" width=\"64\" alt='icon'/></a>";
-}
 
 /**
  * jqGrid重新加载

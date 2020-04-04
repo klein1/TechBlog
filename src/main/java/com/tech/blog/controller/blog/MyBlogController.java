@@ -66,14 +66,14 @@ public class MyBlogController {
      *
      * @return
      */
-    @GetMapping({"/categories"})
-    public String categories(HttpServletRequest request) {
-        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
-        request.setAttribute("categories", categoryService.getAllCategories());
-        request.setAttribute("pageName", "分类页面");
-        request.setAttribute("configurations", configService.getAllConfigs());
-        return "blog/" + theme + "/category";
-    }
+//    @GetMapping({"/categories"})
+//    public String categories(HttpServletRequest request) {
+//        request.setAttribute("hotTags", tagService.getBlogTagCountForIndex());
+//        request.setAttribute("categories", categoryService.getAllCategories());
+//        request.setAttribute("pageName", "分类页面");
+//        request.setAttribute("configurations", configService.getAllConfigs());
+//        return "blog/" + theme + "/category";
+//    }
 
     /**
      * 详情页
